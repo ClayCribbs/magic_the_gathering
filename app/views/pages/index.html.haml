@@ -1,0 +1,18 @@
+%h1 Welcome to Magic The Gathering
+
+
+%h2 Cards in #{@deck.name}
+- @deck.cards.each do |card|
+  = card.name
+  %br
+  = link_to 'Remove This Card', remove_card_pages_path(card_id: card.id), method: :post
+  %br
+  - form_tag do
+    = select_tag 'deck_name', options_from_collection_for_select(Deck.all, "id", "name")
+
+%h2 Cards that are not in #{@deck.name}
+- @cards.each do |card|
+  = card.name
+  %br
+  = link_to 'Add This Card', add_card_pages_path(card_id: card.id), method: :post
+  %br
